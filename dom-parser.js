@@ -25,7 +25,11 @@ DOMParser.prototype.parseFromString = function(source,mimeType){
 	}
 	defaultNSMap.xml = defaultNSMap.xml || 'http://www.w3.org/XML/1998/namespace';
 	if(source){
-		sax.parse(source,defaultNSMap,entityMap);
+		try {
+      sax.parse(source,defaultNSMap,entityMap);
+    } catch (err) {
+      console.warn(err.message)
+    }
 	}else{
 		sax.errorHandler.error("invalid document source");
 	}
